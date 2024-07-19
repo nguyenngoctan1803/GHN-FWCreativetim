@@ -1,0 +1,172 @@
+.row-flex {
+	display: -webkit-flex;
+	display: flex;
+}
+.advantage-box {
+	text-align: center;
+	display: block;
+	background: #FFFFFF;
+	box-shadow: 0 2px 48px 0 rgba(0, 0, 0, 0.06);
+	border-radius: 40px 0 40px 40px;
+	padding: 30px;
+	text-align: center;
+	-webkit-transition: all 0.3s ease 0s;
+	-moz-transition: all 0.3s ease 0s;
+	-o-transition: all 0.3s ease 0s;
+	transition: all 0.3s ease 0s;
+	position: relative;
+	overflow: hidden;
+	height: 100%;
+}
+.advantage-box:before {
+	content: '';
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0px;
+	left: 0px;
+	border-radius: 40px 0 40px 40px;
+	background-image: linear-gradient(135deg, #00467f 0%, rgba(7, 79, 128, 0.8) 100%);
+	-webkit-transition: all 0.3s ease 0s;
+	-moz-transition: all 0.3s ease 0s;
+	-o-transition: all 0.3s ease 0s;
+	transition: all 0.3s ease 0s;
+	opacity: 0;
+}
+.advantage-box .advantage-ico {
+	width: 67px;
+	height: 67px;
+	line-height: 65px;
+	margin: auto;
+	position: relative;
+	margin-bottom: 20px;
+	background: #edf7fd;
+	border-radius: 22px 0 22px 22px;
+}
+.advantage-box .advantage-ico img {width: 35px;}
+.advantage-box .advantage-desc h3 {
+	font-weight: 400;
+	font-size: 18px;
+	height: 42px;
+	color: #00467f;
+	margin-bottom: 15px;
+	position: relative;
+	z-index: 2;
+	-webkit-transition: all 0.3s ease 0s;
+	-moz-transition: all 0.3s ease 0s;
+	-o-transition: all 0.3s ease 0s;
+	transition: all 0.3s ease 0s;
+}
+.advantage-box .advantage-desc p {
+	font-weight: 400;
+	font-size: 14px;
+	letter-spacing: 0.3px;
+	line-height: 26px;
+	position: relative;
+	z-index: 2;
+	-webkit-transition: all 0.3s ease 0s;
+	-moz-transition: all 0.3s ease 0s;
+	-o-transition: all 0.3s ease 0s;
+	transition: all 0.3s ease 0s;
+	margin-bottom: 20px;
+}
+.advantage-box:hover:before {opacity: 1;}
+.advantage-box:hover .advantage-desc h3,
+.advantage-box:hover .advantage-desc p {
+	color: #fff;
+}
+@media (max-width:991px) {
+	.row-flex {flex-wrap: wrap;justify-content: center;}
+	.row-flex .col {margin-bottom: 30px;}
+}
+@media (min-width: 992px) {
+	.col {width: 100%;}
+}
+
+.col {width: 100% !important;}
+
+.card-post-order{
+    width: 100%;
+    font-weight: 600 !important;
+}
+
+.stacked-form {
+    max-height: 100%;
+    overflow: auto;
+}
+.form-group {
+    margin-bottom: 2rem;
+}
+.card .card-body .control-label {
+    text-align: right;
+    line-height: 2rem;
+}
+.card-header {
+    padding: 0 0.75rem 0.75rem;
+    background-color: #00467f
+}
+.card-title {
+    font-weight: bold;
+    color: #fff;
+}
+.process-bar {
+    display: -webkit-flex;
+    display: flex;
+}
+.process-bar .process-step {
+    position: relative;
+    margin: 30px 0 0;
+    width: 100%;
+}
+.process-bar .process-step .ic-step {
+    width: 100px;
+    height: 100px;
+    background: #fff;
+    border-radius: 50%;
+    border: 5px solid #00467f;
+    margin: auto;
+    padding: 20px;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.25);
+    transition: all 0.35s ease;
+}
+.process-bar .process-step .title-step {
+    margin-top: 50px;
+    padding: 0 15px;
+    text-align: center;
+    font-size: 13px;
+}
+.process-bar .process-step .title-step h3 {
+    font-size: 14px;
+    text-transform: uppercase;
+    font-family: 'Montserrat', Helvetica, sans-serif;
+    font-weight: 600;
+    margin: 0 0 13px 0;
+}
+.dt-width-auto {
+    width: auto;
+    height: auto;
+}
+.process-bar .process-step {position: relative;margin: 30px 0 0;width: 100%;}
+.process-bar .process-step:not(:last-child):before {
+	content: "";
+	position: absolute;
+	left: 50%;
+	top: 50px;
+	transform: translateY(0);
+	background: rgba(7, 79, 128, 0.7);
+	width: 100%;
+	height: 5px;
+	z-index: 1;
+}
+ .process-bar .process-step:hover .ic-step {
+	transform: scale(1.1, 1.1);
+}
+.process-bar .process-step:hover img {
+	transition: -webkit-transform 0.4s ease-out;
+	transition: transform 0.4s ease-out;
+	transition: transform 0.4s ease-out, -webkit-transform 0.4s ease-out;
+	-webkit-transform: rotateZ(360deg);
+	transform: rotateZ(360deg);
+}

@@ -1,0 +1,60 @@
+<div class="wrapper">
+    <div class="page-header" style="background-image: url('./assets/img/login-image.jpg');">
+        <div class="filter"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-sm-6 mr-auto ml-auto">
+                      <div class="card card-register">
+                          <h3 class="text-center mb-1">Welcome</h3>
+                          <div class="social-line text-center">
+                              <a href="#pablo" class="btn btn-neutral btn-facebook btn-just-icon">
+                                  <i class="fa fa-facebook-square"></i>
+                              </a>
+                              <a href="#pablo" class="btn btn-neutral btn-google btn-just-icon">
+                                  <i class="fa fa-google-plus"></i>
+                              </a>
+                              <a href="#pablo" class="btn btn-neutral btn-twitter btn-just-icon">
+                                  <i class="fa fa-twitter"></i>
+                              </a>
+                          </div>
+                          <form class="register-form" [formGroup]="signinForm" (ngSubmit)="onSubmit()">
+                              <label for="email">Email</label>
+                              <div class="input-group form-group-no-border" [ngClass]="{'has-danger':signinForm.get('email').invalid && signinForm.get('email').touched}">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text">
+                                      <i class="nc-icon nc-email-85"></i>
+                                  </span>
+                                </div>
+                                <input id="email" formControlName="email" type="text" class="form-control" placeholder="Email">
+                              </div>
+                              <div *ngIf="signinForm.get('email').invalid && signinForm.get('email').touched" class="form-control-feedback">
+                                <small *ngIf="signinForm.get('email').errors?.required">Vui lòng nhập email.</small>
+                                <small *ngIf="signinForm.get('email').errors?.email">Email không hợp lệ!</small>
+                              </div>
+                              <label>Password</label>
+                              <div class="input-group form-group-no-border" [ngClass]="{'has-danger':signinForm.get('password').invalid && signinForm.get('password').touched}">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text">
+                                      <i class="nc-icon nc-key-25"></i>
+                                  </span>
+                                </div>
+                                  <input id="password" formControlName="password" type="text" class="form-control" placeholder="Mật khẩu" >
+                              </div>
+                              <div *ngIf="signinForm.get('password').invalid && signinForm.get('password').touched" class="form-control-feedback">
+                                <small *ngIf="signinForm.get('password').errors?.required">Vui lòng nhập mật khẩu.</small>
+                              </div>
+                              <button type="submit" class="btn btn-danger btn-block btn-round">Đăng nhập</button>
+                          </form>
+                          <div class="forgot mt-5">
+                            <span for="">Chưa có tài khoản?</span> <a class="btn-link text-light font-weight-bold" routerLink="/public/signup">Đăng ký</a>
+                          </div>
+                          
+                      </div>
+                    </div>
+                </div>
+                <div class="footer register-footer text-center">
+                    <h6>&copy;{{test | date: 'yyyy'}}, made with <i class="fa fa-heart heart"></i> by Shiba9duoi</h6>
+                </div>
+            </div>
+    </div>
+</div>

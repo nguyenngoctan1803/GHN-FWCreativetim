@@ -1,0 +1,361 @@
+<div class="wrapper">
+    <!-- <div class="page-header" style="background-image: url('assets/img/ghn-post.png');">
+
+        <h6 class="category-absolute ml-auto mr-auto d-flex justify-content-center">
+            Designed and coded by
+            <a href="https://www.facebook.com/tan.nguyen180301" target="_blank">
+                <h6 class="ml-1">
+                    Shiba9duoi
+                </h6>
+            </a>
+        </h6>
+    </div> -->
+    <div class="main">
+        <div class="section text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 mr-auto ml-auto">
+                        <div class="card-post-order">
+                            <div class="card stacked-form">
+                                <div class="card-header">
+                                    <h4 class="card-title">Đặt hàng ngay</h4>
+                                </div>
+                                <div class="card-body">
+                                    <form [formGroup]="orderForm" (ngSubmit)="onSubmit()">
+                                        <div class="form-group"
+                                            [ngClass]="{'has-danger':orderForm.get('soDienThoaiNguoiGui').invalid && orderForm.get('soDienThoaiNguoiGui').touched}">
+                                            <div class="row">
+                                                <label class="col-sm-3 control-label">Số điện thoại người gửi</label>
+                                                <div class="col-sm-9">
+                                                    <input class="form-control" id="soDienThoaiNguoiGui"
+                                                        formControlName="soDienThoaiNguoiGui">
+                                                    <div *ngIf="orderForm.get('soDienThoaiNguoiGui').invalid && orderForm.get('soDienThoaiNguoiGui').touched"
+                                                        class="form-control-feedback">
+                                                        <span
+                                                            *ngIf="orderForm.get('soDienThoaiNguoiGui').errors?.required">Vui
+                                                            lòng nhập số
+                                                            điện thoại người gửi.</span>
+                                                        <span
+                                                            *ngIf="orderForm.get('soDienThoaiNguoiGui').errors?.pattern">Số
+                                                            điện thoại không
+                                                            hợp lệ!</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group"
+                                            [ngClass]="{'has-danger':orderForm.get('soDienThoaiNguoiNhan').invalid && orderForm.get('soDienThoaiNguoiNhan').touched}">
+                                            <div class="row">
+                                                <label class="col-sm-3 control-label">Số điện thoại người nhận</label>
+                                                <div class="col-sm-9">
+                                                    <input class="form-control" id="soDienThoaiNguoiNhan"
+                                                        formControlName="soDienThoaiNguoiNhan">
+                                                    <div *ngIf="orderForm.get('soDienThoaiNguoiNhan').invalid && orderForm.get('soDienThoaiNguoiNhan').touched"
+                                                        class="form-control-feedback">
+                                                        <span
+                                                            *ngIf="orderForm.get('soDienThoaiNguoiNhan').errors?.required">Vui
+                                                            lòng nhập số
+                                                            điện thoại người nhận.</span>
+                                                        <span
+                                                            *ngIf="orderForm.get('soDienThoaiNguoiNhan').errors?.pattern">Số
+                                                            điện thoại không
+                                                            hợp lệ!</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group"
+                                            [ngClass]="{'has-danger':orderForm.get('diaChiGiaoHang').invalid && orderForm.get('diaChiGiaoHang').touched}">
+                                            <div class="row">
+                                                <label class="col-sm-3 control-label">Địa chỉ giao hàng</label>
+                                                <div class="col-sm-9">
+                                                    <input class="form-control" id="diaChiGiaoHang"
+                                                        formControlName="diaChiGiaoHang">
+                                                    <div *ngIf="orderForm.get('diaChiGiaoHang').invalid && orderForm.get('diaChiGiaoHang').touched"
+                                                        class="form-control-feedback">
+                                                        <span
+                                                            *ngIf="orderForm.get('diaChiGiaoHang').errors?.required">Vui
+                                                            lòng
+                                                            nhập địa
+                                                            chỉ giao hàng.</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group"
+                                            [ngClass]="{'has-danger':orderForm.get('diaChiNhanHang').invalid && orderForm.get('diaChiNhanHang').touched}">
+                                            <div class="row">
+                                                <label class="col-sm-3 control-label">Địa chỉ nhận hàng</label>
+                                                <div class="col-sm-9">
+                                                    <input class="form-control" id="diaChiNhanHang"
+                                                        formControlName="diaChiNhanHang">
+                                                    <div *ngIf="orderForm.get('diaChiNhanHang').invalid && orderForm.get('diaChiNhanHang').touched"
+                                                        class="form-control-feedback">
+                                                        <span
+                                                            *ngIf="orderForm.get('diaChiNhanHang').errors?.required">Vui
+                                                            lòng
+                                                            nhập địa
+                                                            chỉ nhận hàng.</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <label class="col-sm-3 control-label">Chi Tiết Đơn Hàng</label>
+                                                <div class="col-sm-9"></div>
+                                                <div class="col-sm-3"></div>
+                                                <div class="col-sm-9">
+                                                    <div formArrayName="chiTietDonHang">
+                                                        <div *ngFor="let chiTiet of chiTietDonHang.controls; let i = index"
+                                                            [formGroupName]="i">
+                                                            <div class="row col-sm-12"
+                                                                style="font-size: 12px !important;">
+                                                                <div class="col-sm-3 text-left">
+                                                                    <button class="btn btn-danger btn-just-icon"
+                                                                        type="button" (click)="removeChiTietDonHang(i)">
+                                                                        <i class="fa fa-remove"></i>
+                                                                    </button>
+                                                                    <label>
+                                                                        Hàng {{ i + 1 }}
+                                                                    </label>
+                                                                </div>
+                                                                <div class="col-sm-9 mt-2">
+                                                                    <div class="text-left form-group" [ngClass]="{'has-danger':chiTiet.get('tenHangHoa').invalid && chiTiet.get('tenHangHoa').touched}">
+                                                                        <label for="tenHangHoa">Tên Hàng Hóa:</label>
+                                                                        <input class="form-control" id="tenHangHoa"
+                                                                            formControlName="tenHangHoa">
+                                                                        <div *ngIf="chiTiet.get('tenHangHoa').invalid && chiTiet.get('tenHangHoa').touched"
+                                                                            class="form-control-feedback">
+                                                                            <span
+                                                                                *ngIf="chiTiet.get('tenHangHoa').errors?.required">Vui
+                                                                                lòng nhập tên hàng hóa.</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="text-left form-group" [ngClass]="{'has-danger':chiTiet.get('tienThuHoCOD').invalid && chiTiet.get('tienThuHoCOD').touched}">
+                                                                        <label for="tienThuHoCOD">Tiền Thu Hộ:</label>
+                                                                        <input class="form-control" id="tienThuHoCOD"
+                                                                            formControlName="tienThuHoCOD" type="number" min="1">
+                                                                        <div *ngIf="chiTiet.get('tienThuHoCOD').invalid && chiTiet.get('tienThuHoCOD').touched"
+                                                                            class="form-control-feedback">
+                                                                            <span
+                                                                                *ngIf="chiTiet.get('tienThuHoCOD').errors?.required">Vui
+                                                                                lòng nhập tiền thu hộ.</span>
+                                                                                <span
+                                                                                *ngIf="chiTiet.get('tienThuHoCOD').errors?.min">Tiền thu hộ phải lớn hơn 0.</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="text-left form-group" [ngClass]="{'has-danger':chiTiet.get('khoiLuong').invalid && chiTiet.get('khoiLuong').touched}">
+                                                                        <label for="khoiLuong">Khối Lượng:</label>
+                                                                        <input class="form-control" id="khoiLuong"
+                                                                            formControlName="khoiLuong" type="number" min="1">
+                                                                        <div *ngIf="chiTiet.get('khoiLuong').invalid && chiTiet.get('khoiLuong').touched"
+                                                                            class="form-control-feedback">
+                                                                            <span
+                                                                                *ngIf="chiTiet.get('khoiLuong').errors?.required">Vui
+                                                                                lòng nhập khối lượng.</span>
+                                                                                <span
+                                                                                *ngIf="chiTiet.get('khoiLuong').errors?.min">Khối lương phải lớn hơn 0.</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="my-3 mx-5"
+                                                                style="border-bottom: 1px solid #000">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-3 text-left">
+                                                            <button class="btn btn-success btn-just-icon" type="button"
+                                                                (click)="addChiTietDonHang()">
+                                                                <i class="fa fa-plus"></i>
+                                                            </button>
+                                                        </div>
+                                                        <div class="col-sm-9 mt-2">
+                                                        </div>
+                                                    </div>
+
+                                                    <button type="submit" [disabled]="orderForm.invalid"
+                                                        class="btn btn-fill btn-info">Gửi</button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div>
+                                <div class="card-footer ">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row row-flex">
+                    <div class="col col-md-4 col-xs-12">
+                        <div class="advantage-box">
+                            <div class="advantage-ico">
+                                <img src="//theme.hstatic.net/200000472237/1001083717/14/cp_advantages1.png?v=592"
+                                    alt="MIỄN PHÍ LẤY HÀNG" class="dt-width-auto">
+                            </div>
+                            <div class="advantage-desc">
+                                <h3>MIỄN PHÍ LẤY HÀNG</h3>
+                                <p>GHN sẽ không thu phí lấy hàng cho các đơn hàng nhân viên giao nhận đến tận nơi để
+                                    nhận hàng.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col col-md-4 col-xs-12">
+                        <div class="advantage-box">
+                            <div class="advantage-ico">
+                                <img src="//theme.hstatic.net/200000472237/1001083717/14/cp_advantages3.png?v=592"
+                                    alt="MIỄN PHÍ GIAO LẠI" class="dt-width-auto">
+                            </div>
+                            <div class="advantage-desc">
+                                <h3>MIỄN PHÍ GIAO LẠI</h3>
+                                <p>Trong trường hợp giao hàng lần đầu không thành công, GHN sẽ miễn phí giao lại 2 lần
+                                    tiếp theo trước khi hoàn trả hàng cho người gửi.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col col-md-4 col-xs-12">
+                        <div class="advantage-box">
+                            <div class="advantage-ico">
+                                <img src="//theme.hstatic.net/200000472237/1001083717/14/cp_advantages4.png?v=592"
+                                    alt="CHIẾT KHẤU KHI NẠP GHN XU" class="dt-width-auto">
+                            </div>
+                            <div class="advantage-desc">
+                                <h3>CHIẾT KHẤU KHI NẠP GHN XU</h3>
+                                <p>Là hình thức thanh toán trả trước; nạp GHN Xu để được hoàn tiền vào ví lên đến 6% số
+                                    tiền đã nạp.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br /><br />
+                <div class="row">
+                    <div class="col-md-12 mr-auto ml-auto">
+                        <h2 class="title font-weight-bold" style="color: #00467f;">BẢNG GIÁ DỊCH VỤ</h2>
+                        <br>
+                        <div class="nav-container">
+                            <div class="nav-tabs-navigation">
+                                <div class="nav-tabs-wrapper">
+                                    <ngb-tabset [justify]="'center'">
+                                        <ngb-tab>
+                                            <ng-template ngbTabTitle>
+                                               <span class="font-weight-bold">Bảng giá nội tỉnh</span> 
+                                            </ng-template>
+                                            <ng-template ngbTabContent>
+                                                <img src="assets/img/banggia-noitinh.png" />
+                                            </ng-template>
+                                        </ngb-tab>
+                                        <ngb-tab>
+                                            <ng-template ngbTabTitle>
+                                                <span class="font-weight-bold">Bảng giá nội vùng</span> 
+                                            </ng-template>
+                                            <ng-template ngbTabContent>
+                                                <img src="assets/img/banggia-noivung.png" />
+                                            </ng-template>
+                                        </ngb-tab>
+                                        <ngb-tab>
+                                            <ng-template ngbTabTitle>
+                                                <span class="font-weight-bold">Bảng giá liên vùng đặc biệt</span> 
+                                                
+                                            </ng-template>
+                                            <ng-template ngbTabContent>
+                                                <img src="assets/img/banggia-lienvungdb.png" />
+                                            </ng-template>
+                                        </ngb-tab>
+                                    </ngb-tabset>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br /><br />
+                <div class="row">
+                    <div class="col-md-12 mr-auto ml-auto">
+                        <h2 class="title font-weight-bold" style="color: #00467f;">QUY TRÌNH GIAO NHẬN</h2>
+                        <br>
+                    </div>
+                    <div class="container">
+                        <div class="s-content">
+                            <div class="process-bar">
+                                <div class="process-step">
+                                    <div class="ic-step">
+                                        <img width="600" height="600" class="dt-width-auto"
+                                            src="//theme.hstatic.net/200000472237/1001083717/14/cp_process1_thumb.png?v=592"
+                                            alt=" Đăng nhập/ <br> Đăng ký">
+                                    </div>
+                                    <div class="title-step">
+                                        <h3> Đăng nhập/ <br> Đăng ký</h3>
+                                        <p>Đăng nhập hoặc tạo tài khoản mới trên app GHN hoặc website khachhang.ghn.vn
+                                            để bắt đầu.</p>
+                                    </div>
+                                </div>
+                                <div class="process-step">
+                                    <div class="ic-step">
+                                        <img width="600" height="600" class="dt-width-auto"
+                                            src="//theme.hstatic.net/200000472237/1001083717/14/cp_process2_thumb.png?v=592"
+                                            alt="Tạo đơn hàng">
+                                    </div>
+                                    <div class="title-step">
+                                        <h3>Tạo đơn hàng</h3>
+                                        <p>Tạo đơn hàng trên app GHN Express / website khachhang.ghn.vn, hoặc ghé hệ
+                                            thống 2000 điểm gửi hàng GHN toàn quốc.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="process-step">
+                                    <div class="ic-step">
+                                        <img width="600" height="600" class="dt-width-auto"
+                                            src="//theme.hstatic.net/200000472237/1001083717/14/cp_process3_thumb.png?v=592"
+                                            alt="Lấy hàng">
+                                    </div>
+                                    <div class="title-step">
+                                        <h3>Lấy hàng</h3>
+                                        <p>Bàn giao hàng cần gửi cho tài xế GHN tại địa chỉ người gửi cung cấp.</p>
+                                    </div>
+                                </div>
+                                <div class="process-step">
+                                    <div class="ic-step">
+                                        <img width="600" height="600" class="dt-width-auto"
+                                            src="//theme.hstatic.net/200000472237/1001083717/14/cp_process4_thumb.png?v=592"
+                                            alt="Theo dõi tình trạng đơn hàng">
+                                    </div>
+                                    <div class="title-step">
+                                        <h3>Theo dõi tình trạng đơn hàng</h3>
+                                        <p>Người gửi quản lý và theo dõi tình trạng đơn hàng thông qua app GHN hoặc
+                                            website khachhang.ghn.vn.</p>
+                                    </div>
+                                </div>
+                                <div class="process-step">
+                                    <div class="ic-step">
+                                        <img width="600" height="600" class="dt-width-auto"
+                                            src="//theme.hstatic.net/200000472237/1001083717/14/cp_process5_thumb.png?v=592"
+                                            alt="Giao hàng">
+                                    </div>
+                                    <div class="title-step">
+                                        <h3>Giao hàng</h3>
+                                        <p>GHN giao hàng cho người nhận, thu tiền hộ (COD) theo yêu cầu của người gửi.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="process-step">
+                                    <div class="ic-step">
+                                        <img width="600" height="600" class="dt-width-auto"
+                                            src="//theme.hstatic.net/200000472237/1001083717/14/cp_process6_thumb.png?v=592"
+                                            alt="Nhận tiền thu hộ">
+                                    </div>
+                                    <div class="title-step">
+                                        <h3>Nhận tiền thu hộ</h3>
+                                        <p>GHN hoàn trả tiền thu hộ cho người gửi thông qua tài khoản ngân hàng xuyên
+                                            suốt các ngày trong tuần.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br /><br />
+            </div>
+        </div>
+    </div>
+</div>
