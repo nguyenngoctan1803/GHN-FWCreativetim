@@ -7,9 +7,9 @@ import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
     styles: [`
     ngb-progressbar {
         margin-top: 5rem;
-    },
+    }
     .container{
-        max-width: 1240px !important
+        max-width: 1240px !important;
     }
     `]
 })

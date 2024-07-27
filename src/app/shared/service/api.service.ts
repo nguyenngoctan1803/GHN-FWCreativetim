@@ -26,7 +26,7 @@ export class ApiService {
 
   // POST
   post(endpoint: string, body: any, options?: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/${endpoint}`, body, {headers: this.createHeaders()}).pipe(
+    return this.http.post(`${this.apiUrl}/${endpoint}`, body, options).pipe(
       catchError(this.handleError)
     );
   }
@@ -43,24 +43,16 @@ export class ApiService {
     );
   }
 
- // Error handling
- private handleError(error: HttpErrorResponse) {
-  let errorMessage = '';
-  if (error.error instanceof ErrorEvent) {
-    // Client-side errors
-    errorMessage = `Error: ${error.error.message}`;
-  } else {
-    // Server-side errors
-    errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-  }
-  return throwError(errorMessage);
-}
-
-  // Custom headers example
-  private createHeaders(): HttpHeaders {
-    return new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer your-token' // Thay đổi token nếu cần
-    });
+  // Error handling
+  private handleError(error: HttpErrorResponse) {
+    let errorMessage = '';
+    if (error.error instanceof ErrorEvent) {
+      // Client-side errors
+      errorMessage = `Error: ${error.error.message}`;
+    } else {
+      // Server-side errors
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+    return throwError(errorMessage);
   }
 }

@@ -12,13 +12,11 @@ import { SigninComponent } from './examples/signin/signin.component';
 
 const routes: Routes =[
     { path: '', redirectTo: 'public', pathMatch: 'full' },
+
     { path: 'public', loadChildren: () => import('./public/public.module').then(m => m.PublicModule) },
-    // { path: 'user-profile',     component: ProfileComponent },
-    // { path: 'signup',           component: SignupComponent },
-    // { path: 'signin',           component: SigninComponent },
-    // { path: 'landing',          component: LandingComponent },
-    // { path: 'nucleoicons',      component: NucleoiconsComponent }
-    { path: 'component',      component: ComponentsComponent }
+    { path: 'system', loadChildren: () => import('./system/system.module').then(m => m.SystemModule) },
+    { path: 'component',  component: ComponentsComponent },
+    { path: '**', redirectTo: 'public'},
 ];
 
 @NgModule({

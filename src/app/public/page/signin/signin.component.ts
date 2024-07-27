@@ -3,9 +3,10 @@ import { Router } from '@angular/router';
 import {FormGroup, FormControl, EmailValidator, Validators} from '@angular/forms';
 import { CustomerService } from 'app/public/service/customer.service';
 import { ToastrService } from 'ngx-toastr';
-import { StorageService } from 'app/shared/service/storage.service';
 import { environment } from 'environments/environment';
+import { StorageService } from 'app/shared/service/storage.service';
 import { SubjectService } from 'app/shared/service/subject.service';
+
 
 @Component({
   selector: 'app-signin',
@@ -26,11 +27,16 @@ export class SigninComponent implements OnInit {
     private router:Router, 
     private customerService: CustomerService,
     private toastr: ToastrService,
-    private cokieService: StorageService,
     private subjectService: SubjectService
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.subjectService.isLoggedIn.subscribe(loggedIn => {
+      if(loggedIn){
+        this.router.navigate(['/public/home']);
+      } 
+    });
+  }
 
   onSubmit() {
     if (this.signinForm.valid) {

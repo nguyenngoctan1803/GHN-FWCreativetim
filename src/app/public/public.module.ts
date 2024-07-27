@@ -11,18 +11,32 @@ import { HomeComponent } from './page/home/home.component';
 import { SigninComponent } from './page/signin/signin.component';
 import { SignupComponent } from './page/signup/signup.component';
 import { HttpClientModule } from '@angular/common/http'; // Import HttpClientModule
-import { ApiService } from 'app/shared/service/api.service';
+
 import { CustomerService } from './service/customer.service';
 import { CreateOrderComponent } from './page/create-order/create-order.component';
-import { StorageService } from 'app/shared/service/storage.service';
 
-
+import { NotfoundComponent } from './page/notfound/notfound.component';
+import { PublicComponent } from './public.component';
+import { NavbarComponent } from 'app/public/shared/navbar/navbar.component';
+import { FooterComponent } from 'app/public/shared/footer/footer.component';
+import { NgWizardModule, NgWizardConfig, THEME } from 'ng-wizard';
+import { NgSelect2Module } from 'ng-select2';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface, PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+  suppressScrollX: true
+}
+import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     HomeComponent,
+    NavbarComponent,
+    FooterComponent,
     SigninComponent,
     SignupComponent,
-    CreateOrderComponent
+    CreateOrderComponent,
+    NotfoundComponent,
+    PublicComponent,
   ],
   imports: [
     CommonModule,
@@ -30,11 +44,20 @@ import { StorageService } from 'app/shared/service/storage.service';
     ReactiveFormsModule,
     NgbModule,
     NouisliderModule,
-    RouterModule,
     HttpClientModule,
     JwBootstrapSwitchNg2Module,
+    NgWizardModule,
+    NgSelect2Module,
+    NgxPaginationModule,
+    PerfectScrollbarModule,
+    NgbTypeaheadModule,
     PublicRoutingModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: PERFECT_SCROLLBAR_CONFIG,
+      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
+    }
+  ],
 })
 export class PublicModule { }

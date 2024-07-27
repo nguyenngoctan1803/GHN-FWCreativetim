@@ -8,13 +8,13 @@ export class StorageService {
   constructor() { }
   
    // Cookie Methods
-   setCookie(name: string, value: string, days: number = 1): void {
+   setCookie(name: string, value: string, hours: number = 1): void {
     const date = new Date();
-    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+    date.setTime(date.getTime() + (hours * 60 * 60 * 1000));
     const expires = `expires=${date.toUTCString()}`;
     document.cookie = `${name}=${value};${expires};path=/`;
   }
-
+  
   getCookie(name: string): string | null {
     const nameEQ = `${name}=`;
     const ca = document.cookie.split(';');
@@ -41,6 +41,16 @@ export class StorageService {
   }
   deleteCookie(name: string): void {
     this.setCookie(name, '', -1);
+  }
+  // Xóa tất cả các cookie
+  clearCookie(): void {
+    const cookies = document.cookie.split(";");
+
+    for (const cookie of cookies) {
+      const eqPos = cookie.indexOf("=");
+      const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+      this.deleteCookie(name.trim());
+    }
   }
 
   // LocalStorage Methods

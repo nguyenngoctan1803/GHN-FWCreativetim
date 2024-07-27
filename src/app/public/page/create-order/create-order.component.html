@@ -11,174 +11,390 @@
         </h6>
     </div> -->
     <div class="main">
-        <div class="section text-center">
+        <div class="text-center">
             <div class="container">
                 <div class="row">
+
                     <div class="col-md-12 mr-auto ml-auto">
                         <div class="card-post-order">
                             <div class="card stacked-form">
                                 <div class="card-header">
-                                    <h4 class="card-title">Đặt hàng ngay</h4>
+                                    <h4 class="card-title text-uppercase">Đặt hàng ngay</h4>
                                 </div>
                                 <div class="card-body">
                                     <form [formGroup]="orderForm" (ngSubmit)="onSubmit()">
-                                        <div class="form-group"
-                                            [ngClass]="{'has-danger':orderForm.get('soDienThoaiNguoiGui').invalid && orderForm.get('soDienThoaiNguoiGui').touched}">
-                                            <div class="row">
-                                                <label class="col-sm-3 control-label">Số điện thoại người gửi</label>
-                                                <div class="col-sm-9">
-                                                    <input class="form-control" id="soDienThoaiNguoiGui"
-                                                        formControlName="soDienThoaiNguoiGui">
-                                                    <div *ngIf="orderForm.get('soDienThoaiNguoiGui').invalid && orderForm.get('soDienThoaiNguoiGui').touched"
-                                                        class="form-control-feedback">
-                                                        <span
-                                                            *ngIf="orderForm.get('soDienThoaiNguoiGui').errors?.required">Vui
-                                                            lòng nhập số
-                                                            điện thoại người gửi.</span>
-                                                        <span
-                                                            *ngIf="orderForm.get('soDienThoaiNguoiGui').errors?.pattern">Số
-                                                            điện thoại không
-                                                            hợp lệ!</span>
+                                        <ng-wizard [config]="config" (stepChanged)="stepChanged($event)">
+                                            <ng-wizard-step [title]="'1'"
+                                                [description]="'Thông tin người gửi và nhận'">
+                                                <div class="form-group"
+                                                    [ngClass]="{'has-danger':orderForm.get('soDienThoaiNguoiGui').invalid && orderForm.get('soDienThoaiNguoiGui').touched}">
+                                                    <div class="row">
+                                                        <label class="col-sm-3 control-label">Số điện thoại người
+                                                            gửi</label>
+                                                        <div class="col-sm-9">
+                                                            <input class="form-control" id="soDienThoaiNguoiGui"
+                                                                formControlName="soDienThoaiNguoiGui">
+                                                            <div *ngIf="orderForm.get('soDienThoaiNguoiGui').invalid && orderForm.get('soDienThoaiNguoiGui').touched"
+                                                                class="form-control-feedback">
+                                                                <span
+                                                                    *ngIf="orderForm.get('soDienThoaiNguoiGui').errors?.required">Vui
+                                                                    lòng nhập số điện thoại người gửi.</span>
+                                                                <span
+                                                                    *ngIf="orderForm.get('soDienThoaiNguoiGui').errors?.pattern">Số
+                                                                    điện thoại không hợp lệ!</span>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group"
-                                            [ngClass]="{'has-danger':orderForm.get('soDienThoaiNguoiNhan').invalid && orderForm.get('soDienThoaiNguoiNhan').touched}">
-                                            <div class="row">
-                                                <label class="col-sm-3 control-label">Số điện thoại người nhận</label>
-                                                <div class="col-sm-9">
-                                                    <input class="form-control" id="soDienThoaiNguoiNhan"
-                                                        formControlName="soDienThoaiNguoiNhan">
-                                                    <div *ngIf="orderForm.get('soDienThoaiNguoiNhan').invalid && orderForm.get('soDienThoaiNguoiNhan').touched"
-                                                        class="form-control-feedback">
-                                                        <span
-                                                            *ngIf="orderForm.get('soDienThoaiNguoiNhan').errors?.required">Vui
-                                                            lòng nhập số
-                                                            điện thoại người nhận.</span>
-                                                        <span
-                                                            *ngIf="orderForm.get('soDienThoaiNguoiNhan').errors?.pattern">Số
-                                                            điện thoại không
-                                                            hợp lệ!</span>
+                                                <div class="form-group"
+                                                    [ngClass]="{'has-danger':orderForm.get('soDienThoaiNguoiNhan').invalid && orderForm.get('soDienThoaiNguoiNhan').touched}">
+                                                    <div class="row">
+                                                        <label class="col-sm-3 control-label">Số điện thoại người
+                                                            nhận</label>
+                                                        <div class="col-sm-9">
+                                                            <input class="form-control" id="soDienThoaiNguoiNhan"
+                                                                formControlName="soDienThoaiNguoiNhan">
+                                                            <div *ngIf="orderForm.get('soDienThoaiNguoiNhan').invalid && orderForm.get('soDienThoaiNguoiNhan').touched"
+                                                                class="form-control-feedback">
+                                                                <span
+                                                                    *ngIf="orderForm.get('soDienThoaiNguoiNhan').errors?.required">Vui
+                                                                    lòng nhập số điện thoại người nhận.</span>
+                                                                <span
+                                                                    *ngIf="orderForm.get('soDienThoaiNguoiNhan').errors?.pattern">Số
+                                                                    điện thoại không hợp lệ!</span>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group"
-                                            [ngClass]="{'has-danger':orderForm.get('diaChiGiaoHang').invalid && orderForm.get('diaChiGiaoHang').touched}">
-                                            <div class="row">
-                                                <label class="col-sm-3 control-label">Địa chỉ giao hàng</label>
-                                                <div class="col-sm-9">
-                                                    <input class="form-control" id="diaChiGiaoHang"
-                                                        formControlName="diaChiGiaoHang">
-                                                    <div *ngIf="orderForm.get('diaChiGiaoHang').invalid && orderForm.get('diaChiGiaoHang').touched"
-                                                        class="form-control-feedback">
-                                                        <span
-                                                            *ngIf="orderForm.get('diaChiGiaoHang').errors?.required">Vui
-                                                            lòng
-                                                            nhập địa
-                                                            chỉ giao hàng.</span>
+                                            </ng-wizard-step>
+
+                                            <ng-wizard-step [title]="'2'" [description]="'Thông tin địa chỉ'"
+                                                [canEnter]="isValidStep1.bind(this)">
+                                                <div class="form-group"
+                                                    [ngClass]="{'has-danger':orderForm.get('diaChiNhanHang').invalid && orderForm.get('diaChiNhanHang').touched}">
+                                                    <div class="row">
+                                                        <label class="col-sm-3 control-label">Địa chỉ lấy hàng</label>
+                                                        <div class="col-sm-9">
+                                                            <input id="typeahead-basic" type="text" class="form-control" id="diaChiNhanHang"
+                                                            formControlName="diaChiNhanHang" [ngbTypeahead]="searchWrapper" [resultFormatter]="formatter" [inputFormatter]="inputFormatterTake"/>
+                                                            <div *ngIf="orderForm.get('diaChiNhanHang').invalid && orderForm.get('diaChiNhanHang').touched"
+                                                                class="form-control-feedback">
+                                                                <span
+                                                                    *ngIf="orderForm.get('diaChiNhanHang').errors?.required">Vui
+                                                                    lòng nhập địa chỉ lấy hàng.</span>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group"
-                                            [ngClass]="{'has-danger':orderForm.get('diaChiNhanHang').invalid && orderForm.get('diaChiNhanHang').touched}">
-                                            <div class="row">
-                                                <label class="col-sm-3 control-label">Địa chỉ nhận hàng</label>
-                                                <div class="col-sm-9">
-                                                    <input class="form-control" id="diaChiNhanHang"
-                                                        formControlName="diaChiNhanHang">
-                                                    <div *ngIf="orderForm.get('diaChiNhanHang').invalid && orderForm.get('diaChiNhanHang').touched"
-                                                        class="form-control-feedback">
-                                                        <span
-                                                            *ngIf="orderForm.get('diaChiNhanHang').errors?.required">Vui
-                                                            lòng
-                                                            nhập địa
-                                                            chỉ nhận hàng.</span>
+                                                <div class="form-group"
+                                                    [ngClass]="{'has-danger':orderForm.get('diaChiGiaoHang').invalid && orderForm.get('diaChiGiaoHang').touched}">
+                                                    <div class="row">
+                                                        <label class="col-sm-3 control-label">Địa chỉ giao hàng</label>
+                                                        <div class="col-sm-9">
+                                                            <input id="typeahead-basic" type="text" class="form-control" id="diaChiGiaoHang"
+                                                            formControlName="diaChiGiaoHang" [ngbTypeahead]="searchWrapper" [resultFormatter]="formatter" [inputFormatter]="inputFormatterGive"/>
+                                                            <div *ngIf="orderForm.get('diaChiGiaoHang').invalid && orderForm.get('diaChiGiaoHang').touched"
+                                                                class="form-control-feedback">
+                                                                <span
+                                                                    *ngIf="orderForm.get('diaChiGiaoHang').errors?.required">Vui
+                                                                    lòng nhập địa chỉ giao hàng.</span>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="row">
-                                                <label class="col-sm-3 control-label">Chi Tiết Đơn Hàng</label>
-                                                <div class="col-sm-9"></div>
-                                                <div class="col-sm-3"></div>
-                                                <div class="col-sm-9">
-                                                    <div formArrayName="chiTietDonHang">
-                                                        <div *ngFor="let chiTiet of chiTietDonHang.controls; let i = index"
-                                                            [formGroupName]="i">
-                                                            <div class="row col-sm-12"
-                                                                style="font-size: 12px !important;">
+                                            </ng-wizard-step>
+                                            <ng-wizard-step [title]="'3'" [description]="'Chi tiết đơn hàng'"
+                                                [canEnter]="isValidStep2.bind(this)">
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <label class="col-sm-3 control-label">Chi Tiết Đơn Hàng</label>
+                                                        <div class="col-sm-9"></div>
+                                                        <div class="col-sm-3"></div>
+                                                        <div class="col-sm-9">
+                                                            <div *ngIf="orderForm.get('chiTietDonHang').hasError('minArrayLength')"
+                                                                class="form-control-feedback text-danger">
+                                                                <span>Chi tiết đơn hàng phải có ít nhất một mục.</span>
+                                                            </div>
+                                                            <div formArrayName="chiTietDonHang">
+                                                                <div *ngFor="let chiTiet of chiTietDonHang.controls; let i = index"
+                                                                    [formGroupName]="i">
+                                                                    <div class="row col-sm-12"
+                                                                        style="font-size: 12px !important;">
+                                                                        <div class="col-sm-3 text-left">
+                                                                            <button class="btn btn-danger btn-just-icon"
+                                                                                type="button"
+                                                                                (click)="removeChiTietDonHang(i)">
+                                                                                <i class="fa fa-remove"></i>
+                                                                            </button>
+                                                                            <label>
+                                                                                Hàng {{ i + 1 }}
+                                                                            </label>
+                                                                        </div>
+                                                                        <div class="col-sm-9 mt-2">
+                                                                            <div class="text-left form-group"
+                                                                                [ngClass]="{'has-danger':chiTiet.get('tenHangHoa').invalid && chiTiet.get('tenHangHoa').touched}">
+                                                                                <label for="tenHangHoa">Tên Hàng
+                                                                                    Hóa:</label>
+                                                                                <input class="form-control"
+                                                                                    id="tenHangHoa"
+                                                                                    formControlName="tenHangHoa">
+                                                                                <div *ngIf="chiTiet.get('tenHangHoa').invalid && chiTiet.get('tenHangHoa').touched"
+                                                                                    class="form-control-feedback">
+                                                                                    <span
+                                                                                        *ngIf="chiTiet.get('tenHangHoa').errors?.required">Vui
+                                                                                        lòng nhập tên hàng hóa.</span>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="text-left form-group"
+                                                                                [ngClass]="{'has-danger':chiTiet.get('tienThuHoCOD').invalid && chiTiet.get('tienThuHoCOD').touched}">
+                                                                                <label for="tienThuHoCOD">Tiền Thu
+                                                                                    Hộ:</label>
+                                                                                <input class="form-control"
+                                                                                    id="tienThuHoCOD"
+                                                                                    formControlName="tienThuHoCOD"
+                                                                                    type="number" min="1">
+                                                                                <div *ngIf="chiTiet.get('tienThuHoCOD').invalid && chiTiet.get('tienThuHoCOD').touched"
+                                                                                    class="form-control-feedback">
+                                                                                    <span
+                                                                                        *ngIf="chiTiet.get('tienThuHoCOD').errors?.required">Vui
+                                                                                        lòng nhập tiền thu hộ.</span>
+                                                                                    <span
+                                                                                        *ngIf="chiTiet.get('tienThuHoCOD').errors?.min">Tiền
+                                                                                        thu hộ phải lớn hơn 0.</span>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="text-left form-group"
+                                                                                [ngClass]="{'has-danger':chiTiet.get('khoiLuong').invalid && chiTiet.get('khoiLuong').touched}">
+                                                                                <label for="khoiLuong">Khối
+                                                                                    Lượng:</label>
+                                                                                <input class="form-control"
+                                                                                    id="khoiLuong"
+                                                                                    formControlName="khoiLuong"
+                                                                                    type="number" min="1">
+                                                                                <div *ngIf="chiTiet.get('khoiLuong').invalid && chiTiet.get('khoiLuong').touched"
+                                                                                    class="form-control-feedback">
+                                                                                    <span
+                                                                                        *ngIf="chiTiet.get('khoiLuong').errors?.required">Vui
+                                                                                        lòng nhập khối lượng.</span>
+                                                                                    <span
+                                                                                        *ngIf="chiTiet.get('khoiLuong').errors?.min">Khối
+                                                                                        lương phải lớn hơn 0.</span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="my-3 mx-5"
+                                                                        style="border-bottom: 1px solid #000">
+                                                                    </div>
+                                                                </div>
                                                                 <div class="col-sm-3 text-left">
-                                                                    <button class="btn btn-danger btn-just-icon"
-                                                                        type="button" (click)="removeChiTietDonHang(i)">
-                                                                        <i class="fa fa-remove"></i>
+                                                                    <button class="btn btn-success btn-just-icon"
+                                                                        type="button" (click)="addChiTietDonHang()">
+                                                                        <i class="fa fa-plus"></i>
                                                                     </button>
-                                                                    <label>
-                                                                        Hàng {{ i + 1 }}
-                                                                    </label>
                                                                 </div>
                                                                 <div class="col-sm-9 mt-2">
-                                                                    <div class="text-left form-group" [ngClass]="{'has-danger':chiTiet.get('tenHangHoa').invalid && chiTiet.get('tenHangHoa').touched}">
-                                                                        <label for="tenHangHoa">Tên Hàng Hóa:</label>
-                                                                        <input class="form-control" id="tenHangHoa"
-                                                                            formControlName="tenHangHoa">
-                                                                        <div *ngIf="chiTiet.get('tenHangHoa').invalid && chiTiet.get('tenHangHoa').touched"
-                                                                            class="form-control-feedback">
-                                                                            <span
-                                                                                *ngIf="chiTiet.get('tenHangHoa').errors?.required">Vui
-                                                                                lòng nhập tên hàng hóa.</span>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="text-left form-group" [ngClass]="{'has-danger':chiTiet.get('tienThuHoCOD').invalid && chiTiet.get('tienThuHoCOD').touched}">
-                                                                        <label for="tienThuHoCOD">Tiền Thu Hộ:</label>
-                                                                        <input class="form-control" id="tienThuHoCOD"
-                                                                            formControlName="tienThuHoCOD" type="number" min="1">
-                                                                        <div *ngIf="chiTiet.get('tienThuHoCOD').invalid && chiTiet.get('tienThuHoCOD').touched"
-                                                                            class="form-control-feedback">
-                                                                            <span
-                                                                                *ngIf="chiTiet.get('tienThuHoCOD').errors?.required">Vui
-                                                                                lòng nhập tiền thu hộ.</span>
-                                                                                <span
-                                                                                *ngIf="chiTiet.get('tienThuHoCOD').errors?.min">Tiền thu hộ phải lớn hơn 0.</span>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="text-left form-group" [ngClass]="{'has-danger':chiTiet.get('khoiLuong').invalid && chiTiet.get('khoiLuong').touched}">
-                                                                        <label for="khoiLuong">Khối Lượng:</label>
-                                                                        <input class="form-control" id="khoiLuong"
-                                                                            formControlName="khoiLuong" type="number" min="1">
-                                                                        <div *ngIf="chiTiet.get('khoiLuong').invalid && chiTiet.get('khoiLuong').touched"
-                                                                            class="form-control-feedback">
-                                                                            <span
-                                                                                *ngIf="chiTiet.get('khoiLuong').errors?.required">Vui
-                                                                                lòng nhập khối lượng.</span>
-                                                                                <span
-                                                                                *ngIf="chiTiet.get('khoiLuong').errors?.min">Khối lương phải lớn hơn 0.</span>
-                                                                        </div>
-                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="my-3 mx-5"
-                                                                style="border-bottom: 1px solid #000">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-sm-3 text-left">
-                                                            <button class="btn btn-success btn-just-icon" type="button"
-                                                                (click)="addChiTietDonHang()">
-                                                                <i class="fa fa-plus"></i>
-                                                            </button>
-                                                        </div>
-                                                        <div class="col-sm-9 mt-2">
                                                         </div>
                                                     </div>
-
-                                                    <button type="submit" [disabled]="orderForm.invalid"
-                                                        class="btn btn-fill btn-info">Gửi</button>
                                                 </div>
+                                            </ng-wizard-step>
+                                            <ng-wizard-step [title]="'4'" [description]="'Đặt hàng'"
+                                                >
+                                                <div class="container">
+                                                    <div class="mt-5">
+                                                          <div class="d-style btn btn-brc-tp border-2 bgc-white btn-outline-blue btn-h-outline-blue btn-a-outline-blue w-100 my-2 py-3 shadow-sm">
+                                                            <!-- Basic Plan -->
+                                                            <div class="row align-items-center">
+                                                              <div class="col-12 col-md-4">
+                                                                <h4 class="mt-0 text-170 text-600 text-primary-d1 letter-spacing">
+                                                                  Khoảng cách
+                                                                </h4>
+                                                                <div class="text-secondary-d1 text-120">
+                                                                  <!-- <span class="ml-n15 align-text-bottom"></span><span class="text-180">5000</span> / km -->
+                                                                </div>
+                                                              </div>
+                                                              <ul class="list-unstyled mb-0 col-12 col-md-4 text-dark-l1 text-90 text-left my-4 my-md-0">
+                                                                <li>
+                                                                  <i class="fa fa-check text-success-m2 text-110 mr-2 mt-1"></i>
+                                                                  <span>
+                                                                    <span class="text-110">Đơn giá: 5000Vnd/</span>
+                                                                    km
+                                                                  </span>
+                                                                </li>
+                                                                <li class="mt-25">
+                                                                  <i class="fa fa-check text-success-m2 text-110 mr-2 mt-1"></i>
+                                                                  <span>
+                                                                    <span class="text-110">Khoảng cách: {{summary.distance}}</span>
+                                                                    km
+                                                                  </span>
+                                                                </li>
+                                                    
+                                                                <li class="mt-25">
+                                                                  
+                                                                </li>
+                                                              </ul>
+                                                              <div class="col-12 col-md-4 text-center">
+                                                                <!-- <a href="#" class="f-n-hover btn btn-info btn-raised px-4 py-25 w-75 text-600">Get Started</a> -->
+                                                                <i class="fa fa-arrow-right text-danger-m3 text-180 mr-2  mt-1"></i>
+                                                                  <span class="text-180 text-danger">
+                                                                    {{ formatDecimal(pricePerDistance * summary.distance) }}VND
+                                                                </span>
+                                                              </div>
+                                                            </div>
+                                                    
+                                                          </div>
+                                                    
+                                                    
+                                                    
+                                                          <div class="d-style bgc-white btn btn-brc-tp btn-outline-green btn-h-outline-green btn-a-outline-green w-100 my-2 py-3 shadow-sm border-2">
+                                                            <!-- Pro Plan -->
+                                                            <div class="row align-items-center">
+                                                              <div class="col-12 col-md-4">
+                                                                <h4 class="mt-0 text-170 text-600 text-green-d1 letter-spacing">
+                                                                  Khối lượng
+                                                                </h4>
+                                                    
+                                                                <div class="text-secondary-d2 text-120">
+                                                                  <!-- <div class="text-danger-m3 text-90 mr-1 ml-n4 pos-rel d-inline-block">
+                                                                    $<span class="text-150 deleted-text">30</span>
+                                                                    <span>
+                                                                        <span class="d-block rotate-45 position-l mt-n475 ml-35 fa-2x text-400 border-l-2 h-5 brc-dark-m1"></span>
+                                                                    </span>
+                                                                  </div>
+                                                                  <span class="align-text-bottom">$</span><span class="text-180">20</span> / month -->
+                                                                </div>
+                                                              </div>
+                                                    
+                                                              <ul class="list-unstyled mb-0 col-12 col-md-4 text-dark-l1 text-90 text-left my-4 my-md-0">
+                                                                <li>
+                                                                  <i class="fa fa-check text-success-m2 text-110 mr-2 mt-1"></i>
+                                                                  <span>
+                                                                    <span class="text-110">Đơn giá: 1000Vnd/</span>
+                                                                    km
+                                                                  </span>
+                                                                </li>
+                                                    
+                                                                <li class="mt-25">
+                                                                  <i class="fa fa-check text-success-m2 text-110 mr-2 mt-1"></i>
+                                                                  <span>
+                                                                    <span class="text-110">Khối lượng: {{summary.total_weight}}</span>
+                                                                    kg
+                                                                  </span>
+                                                                </li>
+                                                    
+                                                                <li class="mt-25">
+                                                                  
+                                                                </li>
+                                                              </ul>
+                                                    
+                                                              <div class="col-12 col-md-4 text-center">
+                                                                <!-- <a href="#" class="f-n-hover btn btn-success btn-raised px-4 py-25 w-75 text-600">Get Started</a> -->
+                                                                <i class="fa fa-arrow-right text-danger-m3 text-180 mr-2  mt-1"></i>
+                                                                  <span class="text-180 text-danger">
+                                                                    {{ formatDecimal(pricePerWeight * summary.total_weight) }} VND
+                                                                </span>
+                                                              </div>
+                                                            </div>
+                                                    
+                                                          </div>
+                                                    
+                                                    
+                                                    
+                                                          <div class="d-style btn btn-brc-tp border-2 bgc-white btn-outline-purple btn-h-outline-purple btn-a-outline-purple w-100 my-2 py-3 shadow-sm">
+                                                            <!-- Premium Plan -->
+                                                            <div class="row align-items-center">
+                                                              <div class="col-12 col-md-4">
+                                                                <h4 class="mt-0 text-170 text-600 text-purple-d1 letter-spacing">
+                                                                  Phụ thu
+                                                                </h4>
+                                                    
+                                                                <!-- <div class="text-secondary-d1 text-120">
+                                                                  <span class="ml-n15 align-text-bottom">$</span><span class="text-180">50</span> / month
+                                                                </div> -->
+                                                              </div>
+                                                    
+                                                              <ul class="list-unstyled mb-0 col-12 col-md-4 text-dark-l1 text-90 text-left my-4 my-md-0">
+                                                                <li>
+                                                                  <i class="fa {{summary.distance > surchargeConditionDistance ? 'fa-check' : 'fa-times text-danger-m3'}} text-110 mr-2 mt-1"></i>
+                                                                  <span>
+                                                                    <span class="text-110">Khoảng cách > 20</span>
+                                                                    km
+                                                                  </span> (500VND/km)
+                                                                </li>
+                                                    
+                                                                <li class="mt-25">
+                                                                  <i class="fa {{summary.total_weight > surchargeConditionWeight ? 'fa-check' : 'fa-times text-danger-m3'}} text-success-m2 text-110 mr-2 mt-1"></i>
+                                                                  <span>
+                                                                    <span class="text-110">Khối lượng > 15</span>
+                                                                    kg
+                                                                  </span> (1000VND/km/kg)
+                                                                </li>
+                                                    
+                                                                <li class="mt-25">
+                                                                    <i class="fa {{checkTimeOrder() ? 'fa-check' : 'fa-times text-danger-m3'}} text-110 mr-2 mt-1"></i>
+                                                                    <span>
+                                                                      <span class="text-110">Thời gian: 16h - 8h hôm sau</span>
+                                                                    </span> (2000VND/km)
+                                                                </li>
+                                                              </ul>
+                                                              
+                                                              <div class="col-12 col-md-4 text-center">
+                                                                <!-- <a href="#" class="f-n-hover btn btn-warning btn-raised px-4 py-25 w-75 text-600">Get Started</a> -->
+                                                                <i class="fa fa-arrow-right text-danger-m3 text-180 mr-2  mt-1"></i>
+                                                                <span class="text-180 text-danger">
+                                                                  {{formatDecimal(summary.total_surchange)}} VND
+                                                              </span>
+                                                              </div>
+                                                            </div>
+                                                    
+                                                          </div>
+                                                          <div class="d-style btn btn-brc-tp border-2 bgc-white btn-outline-purple btn-h-outline-purple btn-a-outline-purple w-100 my-2 py-3 shadow-sm">
+                                                            <!-- Premium Plan -->
+                                                            <div class="row align-items-center">
+
+                                                    
+                                                              <ul class="list-unstyled mb-0 col-12 col-md-4 text-dark-l1 text-90 text-left my-4 my-md-0">
+                                                              </ul>
+                                                              <div class="col-12 col-md-4">
+                                                                <h4 class="mt-0 text-170 text-600 text-success letter-spacing">
+                                                                  Tổng
+                                                                </h4>
+                                                    
+                                                                <!-- <div class="text-secondary-d1 text-120">
+                                                                  <span class="ml-n15 align-text-bottom">$</span><span class="text-180">50</span> / month
+                                                                </div> -->
+                                                              </div>
+                                                              <div class="col-12 col-md-4 text-center">
+                                                                <!-- <a href="#" class="f-n-hover btn btn-warning btn-raised px-4 py-25 w-75 text-600">Get Started</a> -->
+                                                                <i class="fa fa-arrow-right text-success text-180 mr-2  mt-1"></i>
+                                                                <span class="text-180 text-success">
+                                                                  {{formatDecimal(summary.total)}} VND
+                                                              </span>
+                                                              </div>
+                                                            </div>
+                                                    
+                                                          </div>
+                                                        </div>
+                                                    </div>
+                                            </ng-wizard-step>
+                                            <div class="float-right mt-3">
+                                                <!-- Custom Next Button -->
+                                                <ng-container *ngIf="this.config.selected != 3; else elseTemplate">
+                                                    <button type="button" class="{{ getNextButtonClass() }}"
+                                                        (click)="showNextStep()">
+                                                        Tiếp theo
+                                                    </button>
+                                                </ng-container>
+                                                <ng-template #elseTemplate>
+                                                    <button type="button" class="btn btn-outline-danger">Thời gian dự kiến: {{summary.duration}}</button>
+                                                    <button type="submit"
+                                                            class="btn btn-fill btn-danger btn-submit">Đặt chuyến</button>
+                                                </ng-template>
                                             </div>
-                                        </div>
+
+                                        </ng-wizard>
 
                                     </form>
                                 </div>
@@ -240,7 +456,7 @@
                                     <ngb-tabset [justify]="'center'">
                                         <ngb-tab>
                                             <ng-template ngbTabTitle>
-                                               <span class="font-weight-bold">Bảng giá nội tỉnh</span> 
+                                                <span class="font-weight-bold">Bảng giá nội tỉnh</span>
                                             </ng-template>
                                             <ng-template ngbTabContent>
                                                 <img src="assets/img/banggia-noitinh.png" />
@@ -248,7 +464,7 @@
                                         </ngb-tab>
                                         <ngb-tab>
                                             <ng-template ngbTabTitle>
-                                                <span class="font-weight-bold">Bảng giá nội vùng</span> 
+                                                <span class="font-weight-bold">Bảng giá nội vùng</span>
                                             </ng-template>
                                             <ng-template ngbTabContent>
                                                 <img src="assets/img/banggia-noivung.png" />
@@ -256,8 +472,8 @@
                                         </ngb-tab>
                                         <ngb-tab>
                                             <ng-template ngbTabTitle>
-                                                <span class="font-weight-bold">Bảng giá liên vùng đặc biệt</span> 
-                                                
+                                                <span class="font-weight-bold">Bảng giá liên vùng đặc biệt</span>
+
                                             </ng-template>
                                             <ng-template ngbTabContent>
                                                 <img src="assets/img/banggia-lienvungdb.png" />

@@ -1,7 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ApiService } from 'app/shared/service/api.service';
 import { StorageService } from 'app/shared/service/storage.service';
 import { environment } from 'environments/environment';
+import { map } from 'rxjs';
 
 
 @Injectable({
@@ -23,6 +25,7 @@ export class CustomerService {
   }
 
   loginSuccess(data){
+    this.cookieService.clearCookie();
     this.cookieService.setCookie(environment.tokenKhachHang, data.token);
     this.cookieService.setCookie(environment.idKhachHang, data.id);
     this.cookieService.setCookie(environment.khachHang, JSON.stringify(data));
@@ -38,7 +41,7 @@ export class CustomerService {
   order(body: any){
     let idKh = this.cookieService.getCookie(environment.idKhachHang);
     body.khachHangID = idKh;
-    console.log(body);
     return this.apiService.post('KhachHang/tao-don-hang', body);
   }
+
 }

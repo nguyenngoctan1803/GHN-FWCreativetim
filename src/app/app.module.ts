@@ -7,23 +7,24 @@ import { AppRoutingModule } from './app.routing';
 import {ReactiveFormsModule} from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './shared/navbar/navbar.component';
-import { FooterComponent } from './shared/footer/footer.component';
 
 import { ComponentsModule } from './components/components.module';
 import { ExamplesModule } from './examples/examples.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import { CustomerService } from './public/service/customer.service';
-import { ApiService } from './shared/service/api.service';
-import { HttpClientModule } from '@angular/common/http';
-
-
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { NgWizardModule, NgWizardConfig, THEME } from 'ng-wizard';
+import { NgSelect2Module } from 'ng-select2';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface, PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { ApiInterceptor } from './shared/service/api.interceptor';
+const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+  suppressScrollX: true
+};
+import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent,
-    FooterComponent,
   ],
   imports: [
     NgbModule,
@@ -37,12 +38,27 @@ import { HttpClientModule } from '@angular/common/http';
       closeButton: true,
       progressBar: true,
     }),
+    NgWizardModule,
     RouterModule,
     ComponentsModule,
     ExamplesModule,
+    NgSelect2Module,
+    NgxPaginationModule,
+    PerfectScrollbarModule,
+    NgbTypeaheadModule,
     AppRoutingModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ApiInterceptor,
+      multi: true
+    },
+    {
+      provide: PERFECT_SCROLLBAR_CONFIG,
+      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
