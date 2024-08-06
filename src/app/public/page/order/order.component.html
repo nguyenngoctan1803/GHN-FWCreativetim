@@ -1,0 +1,391 @@
+<div class="nav-container">
+    <div class="nav-tabs-navigation">
+        <div class="nav-tabs-wrapper">
+            <ngb-tabset [justify]="'center'">
+                <ngb-tab>
+                    <ng-template ngbTabTitle>
+                        <span class="font-weight-bold">Chờ xác nhận</span>
+                        <span
+                            class="popup-badge rounded-pill bg-danger text-white fs-2">{{dataWaitConfirm.length}}</span>
+                    </ng-template>
+                    <ng-template ngbTabContent>
+                        <div class="row">
+                            <div class="col-md-8 mr-auto ml-auto">
+                                <div class="card card-table">
+                                    <div class="card-body">
+                                        <div class="search-container">
+                                            <div class="search-filter">
+
+                                            </div>
+                                            <div class="search-filter">
+
+                                            </div>
+                                        </div>
+                                        <div class="table-container table-responsive rounded-4">
+                                            <perfect-scrollbar [config]="scrollbarConfig"
+                                                style="height: calc(100vh - 19rem);">
+                                                <table class="table table-hover fixed-width mb-0">
+                                                    <thead class="bg-danger sticky-top">
+                                                        <tr>
+                                                            <th scope="col">#ID</th>
+                                                            <th scope="col">Ngày tạo</th>
+                                                            <!-- <th scope="col">SDT người nhận</th>
+                                                <th scope="col">SDT người giao</th>
+                                                <th scope="col">Địa chỉ nhận</th>
+                                                <th scope="col">Địa chỉ giao</th> -->
+                                                            <th scope="col">Tiền vận chuyển</th>
+                                                            <th scope="col" style="min-width: 150px;">Chức năng</th>
+                                                        </tr>
+                                                    </thead>
+
+                                                    <tbody class="scroll-sidebar">
+                                                        <tr
+                                                            *ngFor="let item of dataWaitConfirm | paginate: { itemsPerPage: 10, currentPage: page }">
+                                                            <th scope="row">
+                                                                <p class="font-weight-bold">{{item.donHangID}}</p>
+                                                            </th>
+                                                            <td>
+                                                                <p>{{item.ngayTao | date: 'dd/MM/yyyy HH:mm a'}}</p>
+                                                            </td>
+                                                            <!-- <td>{{item.soDienThoaiNguoiGui}}</td>
+                                                <td>{{item.soDienThoaiNguoiNhan}}</td>
+                                                <td>{{item.diaChiGiaoHang}}</td>
+                                                <td>{{item.diaChiNhanHang}}</td> -->
+                                                            <td>
+                                                                <p>{{item.tienVanChuyen |
+                                                                    customcurrency:'VND':'symbol':'1.0-2':'vi-VN'}}</p>
+                                                            </td>
+                                                            <td>
+                                                                <button class="btn btn-info btn-just-icon"
+                                                                    placement="left" ngbTooltip="Chi tiết"
+                                                                    (click)="openDetailModal(item.donHangID)">
+                                                                    <i class="fa fa-info"></i>
+                                                                </button>
+                                                                <button class="btn btn-danger btn-just-icon"
+                                                                    placement="right" ngbTooltip="Hủy"
+                                                                    (click)="openCancelModal(item.donHangID)">
+                                                                    <i class="fa fa-times"></i>
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </perfect-scrollbar>
+                                        </div>
+                                    </div>
+                                    <div class="pagination-container">
+                                        <div class="pagination">
+                                            <pagination-controls (pageChange)="page = $event"></pagination-controls>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </ngb-tab>
+                <ngb-tab>
+                    <ng-template ngbTabTitle>
+                        <span class="font-weight-bold">Đang giao</span>
+                        <span class="popup-badge rounded-pill bg-danger text-white fs-2">{{dataProcess.length}}</span>
+                    </ng-template>
+                    <ng-template ngbTabContent>
+                        <div class="row">
+                            <div class="col-md-8 mr-auto ml-auto">
+                                <div class="card card-table">
+                                    <div class="card-body">
+                                        <div class="search-container">
+                                            <div class="search-filter">
+
+                                            </div>
+                                            <div class="search-filter">
+
+                                            </div>
+                                        </div>
+                                        <div class="table-container table-responsive rounded-4">
+                                            <perfect-scrollbar [config]="scrollbarConfig"
+                                                style="height: calc(100vh - 19rem);">
+                                                <table class="table table-hover fixed-width mb-0">
+                                                    <thead class="bg-danger sticky-top">
+                                                        <tr>
+                                                            <th scope="col">#ID</th>
+                                                            <th scope="col">Ngày tạo</th>
+                                                            <!-- <th scope="col">SDT người nhận</th>
+                                                <th scope="col">SDT người giao</th>
+                                                <th scope="col">Địa chỉ nhận</th>
+                                                <th scope="col">Địa chỉ giao</th> -->
+                                                            <th scope="col">Tiền vận chuyển</th>
+                                                            <th scope="col" style="min-width: 150px;">Chức năng</th>
+                                                        </tr>
+                                                    </thead>
+
+                                                    <tbody class="scroll-sidebar">
+                                                        <tr
+                                                            *ngFor="let item of dataProcess | paginate: { itemsPerPage: 10, currentPage: page }">
+                                                            <th scope="row">
+                                                                <p class="font-weight-bold">{{item.donHangID}}</p>
+                                                            </th>
+                                                            <td>
+                                                                <p>{{item.ngayTao | date: 'dd/MM/yyyy HH:mm a'}}</p>
+                                                            </td>
+                                                            <!-- <td>{{item.soDienThoaiNguoiGui}}</td>
+                                                <td>{{item.soDienThoaiNguoiNhan}}</td>
+                                                <td>{{item.diaChiGiaoHang}}</td>
+                                                <td>{{item.diaChiNhanHang}}</td> -->
+                                                            <td>
+                                                                <p>{{item.tienVanChuyen |
+                                                                    customcurrency:'VND':'symbol':'1.0-2':'vi-VN'}}</p>
+                                                            </td>
+                                                            <td>
+                                                                <button class="btn btn-info btn-just-icon"
+                                                                    placement="right" ngbTooltip="Chi tiết"
+                                                                    (click)="openDetailModal(item.donHangID)">
+                                                                    <i class="fa fa-info"></i>
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </perfect-scrollbar>
+                                        </div>
+                                    </div>
+                                    <div class="pagination-container">
+                                        <div class="pagination">
+                                            <pagination-controls (pageChange)="page = $event"></pagination-controls>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </ngb-tab>
+                <ngb-tab>
+                    <ng-template ngbTabTitle>
+                        <span class="font-weight-bold">Thành công</span>
+                        <span class="popup-badge rounded-pill bg-danger text-white fs-2">{{dataSuccess.length}}</span>
+                    </ng-template>
+                    <ng-template ngbTabContent>
+                        <div class="row">
+                            <div class="col-md-8 mr-auto ml-auto">
+                                <div class="card card-table">
+                                    <div class="card-body">
+                                        <div class="search-container">
+                                            <div class="search-filter">
+
+                                            </div>
+                                            <div class="search-filter">
+
+                                            </div>
+                                        </div>
+                                        <div class="table-container table-responsive rounded-4">
+                                            <perfect-scrollbar [config]="scrollbarConfig"
+                                                style="height: calc(100vh - 19rem);">
+                                                <table class="table table-hover fixed-width mb-0">
+                                                    <thead class="bg-danger sticky-top">
+                                                        <tr>
+                                                            <th scope="col">#ID</th>
+                                                            <th scope="col">Ngày tạo</th>
+                                                            <!-- <th scope="col">SDT người nhận</th>
+                                                <th scope="col">SDT người giao</th>
+                                                <th scope="col">Địa chỉ nhận</th>
+                                                <th scope="col">Địa chỉ giao</th> -->
+                                                            <th scope="col">Tiền vận chuyển</th>
+                                                            <th scope="col" style="min-width: 150px;">Chức năng</th>
+                                                        </tr>
+                                                    </thead>
+
+                                                    <tbody class="scroll-sidebar">
+                                                        <tr
+                                                            *ngFor="let item of dataSuccess | paginate: { itemsPerPage: 10, currentPage: page }">
+                                                            <th scope="row">
+                                                                <p class="font-weight-bold">{{item.donHangID}}</p>
+                                                            </th>
+                                                            <td>
+                                                                <p>{{item.ngayTao | date: 'dd/MM/yyyy HH:mm a'}}</p>
+                                                            </td>
+                                                            <!-- <td>{{item.soDienThoaiNguoiGui}}</td>
+                                                <td>{{item.soDienThoaiNguoiNhan}}</td>
+                                                <td>{{item.diaChiGiaoHang}}</td>
+                                                <td>{{item.diaChiNhanHang}}</td> -->
+                                                            <td>
+                                                                <p>{{item.tienVanChuyen |
+                                                                    customcurrency:'VND':'symbol':'1.0-2':'vi-VN'}}</p>
+                                                            </td>
+                                                            <td>
+                                                                <button class="btn btn-info btn-just-icon"
+                                                                    placement="right" ngbTooltip="Chi tiết"
+                                                                    (click)="openDetailModal(item.donHangID)">
+                                                                    <i class="fa fa-info"></i>
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </perfect-scrollbar>
+                                        </div>
+                                    </div>
+                                    <div class="pagination-container">
+                                        <div class="pagination">
+                                            <pagination-controls (pageChange)="page = $event"></pagination-controls>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </ngb-tab>
+                <ngb-tab>
+                    <ng-template ngbTabTitle>
+                        <span class="font-weight-bold">Đã hủy</span>
+                        <span class="popup-badge rounded-pill bg-danger text-white fs-2">{{dataCancel.length}}</span>
+                    </ng-template>
+                    <ng-template ngbTabContent>
+                        <div class="row">
+                            <div class="col-md-8 mr-auto ml-auto">
+                                <div class="card card-table">
+                                    <div class="card-body">
+                                        <div class="search-container">
+                                            <div class="search-filter">
+
+                                            </div>
+                                            <div class="search-filter">
+
+                                            </div>
+                                        </div>
+                                        <div class="table-container table-responsive rounded-4">
+                                            <perfect-scrollbar [config]="scrollbarConfig"
+                                                style="height: calc(100vh - 19rem);">
+                                                <table class="table table-hover fixed-width mb-0">
+                                                    <thead class="bg-danger sticky-top">
+                                                        <tr>
+                                                            <th scope="col">#ID</th>
+                                                            <th scope="col">Ngày tạo</th>
+                                                            <!-- <th scope="col">SDT người nhận</th>
+                                                <th scope="col">SDT người giao</th>
+                                                <th scope="col">Địa chỉ nhận</th>
+                                                <th scope="col">Địa chỉ giao</th> -->
+                                                            <th scope="col">Tiền vận chuyển</th>
+                                                            <th scope="col" style="min-width: 150px;">Chức năng</th>
+                                                        </tr>
+                                                    </thead>
+
+                                                    <tbody class="scroll-sidebar">
+                                                        <tr
+                                                            *ngFor="let item of dataCancel | paginate: { itemsPerPage: 10, currentPage: page }">
+                                                            <th scope="row">
+                                                                <p class="font-weight-bold">{{item.donHangID}}</p>
+                                                            </th>
+                                                            <td>
+                                                                <p>{{item.ngayTao | date: 'dd/MM/yyyy HH:mm a'}}</p>
+                                                            </td>
+                                                            <!-- <td>{{item.soDienThoaiNguoiGui}}</td>
+                                                <td>{{item.soDienThoaiNguoiNhan}}</td>
+                                                <td>{{item.diaChiGiaoHang}}</td>
+                                                <td>{{item.diaChiNhanHang}}</td> -->
+                                                            <td>
+                                                                <p>{{item.tienVanChuyen |
+                                                                    customcurrency:'VND':'symbol':'1.0-2':'vi-VN'}}</p>
+                                                            </td>
+                                                            <td>
+                                                                <button class="btn btn-info btn-just-icon"
+                                                                    placement="right" ngbTooltip="Chi tiết"
+                                                                    (click)="openDetailModal(item.donHangID)">
+                                                                    <i class="fa fa-info"></i>
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </perfect-scrollbar>
+                                        </div>
+                                    </div>
+                                    <div class="pagination-container">
+                                        <div class="pagination">
+                                            <pagination-controls (pageChange)="page = $event"></pagination-controls>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </ngb-tab>
+                <ngb-tab>
+                    <ng-template ngbTabTitle>
+                        <span class="font-weight-bold">Hoàn trả</span>
+                        <span class="popup-badge rounded-pill bg-danger text-white fs-2">{{dataRefund.length}}</span>
+                    </ng-template>
+                    <ng-template ngbTabContent>
+                        <div class="row">
+                            <div class="col-md-8 mr-auto ml-auto">
+                                <div class="card card-table">
+                                    <div class="card-body">
+                                        <div class="search-container">
+                                            <div class="search-filter">
+
+                                            </div>
+                                            <div class="search-filter">
+
+                                            </div>
+                                        </div>
+                                        <div class="table-container table-responsive rounded-4">
+                                            <perfect-scrollbar [config]="scrollbarConfig"
+                                                style="height: calc(100vh - 19rem);">
+                                                <table class="table table-hover fixed-width mb-0">
+                                                    <thead class="bg-danger sticky-top">
+                                                        <tr>
+                                                            <th scope="col">#ID</th>
+                                                            <th scope="col">Ngày tạo</th>
+                                                            <!-- <th scope="col">SDT người nhận</th>
+                                                <th scope="col">SDT người giao</th>
+                                                <th scope="col">Địa chỉ nhận</th>
+                                                <th scope="col">Địa chỉ giao</th> -->
+                                                            <th scope="col">Tiền vận chuyển</th>
+                                                            <th scope="col" style="min-width: 150px;">Chức năng</th>
+                                                        </tr>
+                                                    </thead>
+
+                                                    <tbody class="scroll-sidebar">
+                                                        <tr
+                                                            *ngFor="let item of dataRefund | paginate: { itemsPerPage: 10, currentPage: page }">
+                                                            <th scope="row">
+                                                                <p class="font-weight-bold">{{item.donHangID}}</p>
+                                                            </th>
+                                                            <td>
+                                                                <p>{{item.ngayTao | date: 'dd/MM/yyyy HH:mm a'}}</p>
+                                                            </td>
+                                                            <!-- <td>{{item.soDienThoaiNguoiGui}}</td>
+                                                <td>{{item.soDienThoaiNguoiNhan}}</td>
+                                                <td>{{item.diaChiGiaoHang}}</td>
+                                                <td>{{item.diaChiNhanHang}}</td> -->
+                                                            <td>
+                                                                <p>{{item.tienVanChuyen |
+                                                                    customcurrency:'VND':'symbol':'1.0-2':'vi-VN'}}</p>
+                                                            </td>
+                                                            <td>
+                                                                <button class="btn btn-info btn-just-icon"
+                                                                    placement="right" ngbTooltip="Chi tiết"
+                                                                    (click)="openDetailModal(item.donHangID)">
+                                                                    <i class="fa fa-info"></i>
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </perfect-scrollbar>
+                                        </div>
+                                    </div>
+                                    <div class="pagination-container">
+                                        <div class="pagination">
+                                            <pagination-controls (pageChange)="page = $event"></pagination-controls>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </ngb-tab>
+            </ngb-tabset>
+        </div>
+    </div>
+</div>
+<detail-modal #detailModal></detail-modal>
+<cancel-modal #cancelModal (outputEvent)="cancelOrder($event)"></cancel-modal>

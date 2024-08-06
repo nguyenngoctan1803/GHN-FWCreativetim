@@ -3,6 +3,9 @@ import { Location, LocationStrategy, PathLocationStrategy } from '@angular/commo
 import { CustomerService } from 'app/public/service/customer.service';
 import {NgbModal, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import { SubjectService } from 'app/shared/service/subject.service';
+import { StorageService } from 'app/shared/service/storage.service';
+import { environment } from 'environments/environment';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -52,13 +55,16 @@ export class NavbarComponent implements OnInit {
 
     private toggleButton: any;
     private sidebarVisible: boolean;
+    userName: string = '';
     isLoggedIn: boolean;
 
     constructor(
         public location: Location, 
         private element : ElementRef,
         private subjectService: SubjectService,
-        private modalService: NgbModal
+        private modalService: NgbModal,
+        private storage: StorageService,
+        private router: Router
     ) {
         this.sidebarVisible = false;
     }
@@ -68,6 +74,7 @@ export class NavbarComponent implements OnInit {
         this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];
         this.subjectService.isLoggedIn.subscribe(loggedIn => {
             this.isLoggedIn = loggedIn;
+            this.userName = this.storage.getJsonPropertyFromCookie(environment.khachHang, 'hoTen') ?? '';
           });
     }
 
@@ -116,6 +123,13 @@ export class NavbarComponent implements OnInit {
             return false;
         }
     }
+    isActiveMenu(url){
+        var titlee = this.location.prepareExternalUrl(this.location.path());
+      if(titlee.charAt(0) === '#'){
+          titlee = titlee.slice( 1 );
+      }
+      return titlee == url
+    }
     isDocumentation() {
       var titlee = this.location.prepareExternalUrl(this.location.path());
       if(titlee.charAt(0) === '#'){
@@ -127,5 +141,9 @@ export class NavbarComponent implements OnInit {
         else {
             return false;
         }
+    }
+
+    navigateProfile(){
+        this.router.navigateByUrl('/public/profile');
     }
 }

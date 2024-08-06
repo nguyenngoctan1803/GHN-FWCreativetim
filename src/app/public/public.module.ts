@@ -27,6 +27,13 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
 }
 import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
+import { ProfileComponent } from './page/profile/profile.component';
+import { EditProfileComponent } from './page/profile/edit-profile/edit-profile.component';
+import { ChangePasswordComponent } from './page/profile/change-password/change-password.component';
+import { OrderComponent } from './page/order/order.component';
+import { PipeModule } from './shared/modules/pipe/pipe.module';
+import { DetailModalComponent } from './page/order/detail-modal/detail-modal.component';
+import { CancelModalComponent } from './page/order/cancel-modal/cancel-modal.component';
 @NgModule({
   declarations: [
     HomeComponent,
@@ -37,6 +44,12 @@ import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
     CreateOrderComponent,
     NotfoundComponent,
     PublicComponent,
+    ProfileComponent,
+    EditProfileComponent,
+    ChangePasswordComponent,
+    OrderComponent,
+    DetailModalComponent,
+    CancelModalComponent,
   ],
   imports: [
     CommonModule,
@@ -51,6 +64,7 @@ import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
     NgxPaginationModule,
     PerfectScrollbarModule,
     NgbTypeaheadModule,
+    PipeModule,
     PublicRoutingModule,
   ],
   providers: [

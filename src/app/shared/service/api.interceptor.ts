@@ -11,12 +11,14 @@ import { StorageService } from './storage.service';
 import { environment } from 'environments/environment';
 import { Router } from '@angular/router';
 import { HttpStatusCode } from '@angular/common/http';
+import { SubjectService } from './subject.service';
 
 @Injectable()
 export class ApiInterceptor implements HttpInterceptor {
 
   constructor(
     private cookieService: StorageService,
+    private subjectService: SubjectService,
     private router: Router
   ) {}
 
@@ -33,6 +35,7 @@ export class ApiInterceptor implements HttpInterceptor {
         if (error.status === HttpStatusCode.Unauthorized) {
           // Navigate to the login page
           this.cookieService.clearCookie();
+          this.subjectService.logout();
           this.router.navigate(['/login']);
         }
         if (error.status ===  HttpStatusCode.InternalServerError) {

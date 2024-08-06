@@ -14,7 +14,6 @@ const routes: Routes =[
     { path: '', redirectTo: 'public', pathMatch: 'full' },
 
     { path: 'public', loadChildren: () => import('./public/public.module').then(m => m.PublicModule) },
-    { path: 'system', loadChildren: () => import('./system/system.module').then(m => m.SystemModule) },
     { path: 'component',  component: ComponentsComponent },
     { path: '**', redirectTo: 'public'},
 ];

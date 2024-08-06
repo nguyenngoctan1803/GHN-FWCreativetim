@@ -7,12 +7,16 @@ import { CustomerGuard } from "./guard/customer-guard/customer.guard";
 import { CreateOrderComponent } from "./page/create-order/create-order.component";
 import { NotfoundComponent } from "./page/notfound/notfound.component";
 import { PublicComponent } from "./public.component";
+import { ProfileComponent } from "./page/profile/profile.component";
+import { OrderComponent } from "./page/order/order.component";
 
 const routes: Routes = [
   { path: "", children:[
     { path: "", redirectTo: "home", pathMatch: "full" },
     { path: "home", component: HomeComponent },
     { path: "create-order", component: CreateOrderComponent, canActivate: [CustomerGuard] },
+    { path: "order", component: OrderComponent, canActivate: [CustomerGuard] },
+    { path: "profile", component: ProfileComponent, canActivate: [CustomerGuard] },
     { path: "signin", component: SigninComponent },
     { path: "signup", component: SignupComponent},
   

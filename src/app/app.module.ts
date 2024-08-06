@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
@@ -22,6 +22,11 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
 };
 import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
+import localeVi from '@angular/common/locales/vi';
+import { registerLocaleData } from '@angular/common';
+
+// Register the locale data
+registerLocaleData(localeVi, 'vi-VN');
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,7 +62,8 @@ import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
     {
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
-    }
+    },
+    { provide: LOCALE_ID, useValue: 'vi-VN' },
   ],
   bootstrap: [AppComponent]
 })

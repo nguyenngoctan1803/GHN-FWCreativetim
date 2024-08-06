@@ -18,7 +18,7 @@
                     <div class="col-md-12 mr-auto ml-auto">
                         <div class="card-post-order">
                             <div class="card stacked-form">
-                                <div class="card-header">
+                                <div class="card-header bg-danger">
                                     <h4 class="card-title text-uppercase">Đặt hàng ngay</h4>
                                 </div>
                                 <div class="card-body">
@@ -388,7 +388,7 @@
                                                     </button>
                                                 </ng-container>
                                                 <ng-template #elseTemplate>
-                                                    <button type="button" class="btn btn-outline-danger">Thời gian dự kiến: {{summary.duration}}</button>
+                                                    <button *ngIf="summary.duration" type="button" class="btn btn-outline-danger">Thời gian dự kiến: {{summary.duration}}</button>
                                                     <button type="submit"
                                                             class="btn btn-fill btn-danger btn-submit">Đặt chuyến</button>
                                                 </ng-template>

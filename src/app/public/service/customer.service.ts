@@ -44,4 +44,34 @@ export class CustomerService {
     return this.apiService.post('KhachHang/tao-don-hang', body);
   }
 
+  getListOrder(){
+    let idKh = this.cookieService.getCookie(environment.idKhachHang);
+    return this.apiService.get(`KhachHang/don-hang/${idKh}`);
+  }
+  getOrderById(id){
+    return this.apiService.get(`DonHang/${id}`);
+  }
+  getDetailOrderByOrderId(orderId){
+    return this.apiService.get(`Donhang/chitietdonhang/${orderId}`);
+  }
+  getDetailCustomerByCusId(khId){
+    return this.apiService.get(`Khachhang/${khId}`);
+  }
+  getDetailShipperByCusId(id){
+    return this.apiService.get(`Shipper/${id}`);
+  }
+  getReasonOrderByOrderId(orderId){
+    return this.apiService.get(`Donhang/lydohoanhang/${orderId}`);
+  }
+  cancelOrder(orderId){
+    return this.apiService.post(`Donhang/huydonhang/${orderId}`, {});
+  }
+  //
+  updateCustomer(body){
+    return this.apiService.put(`KhachHang/update`, body);
+  }
+  changePassword(body){
+    return this.apiService.put(`KhachHang/changepassword`, body);
+  }
+
 }

@@ -103,7 +103,6 @@
 }
 .card-header {
     padding: 0 0.5rem 0.5rem 0;
-    background-color: #00467f
 }
 .card-title {
     font-weight: bold;
@@ -234,23 +233,23 @@
 }
 
 ::ng-deep .nav-tabs.step-anchor .nav-item.active .nav-link {
-    border: 2px solid #4a90e2;
+    border: 2px solid #00467f;
     color: #4a90e2;
 }
 
 ::ng-deep .nav-tabs.step-anchor .nav-item.completed .nav-link {
-    background-color: #4a90e2;
+    background-color: #00467f;
     color: #fff;
 }
 ::ng-deep .nav-tabs.step-anchor .nav-item.done .nav-link {
-    background-color: #4a90e2;
+    background-color: #00467f;
     color: #fff;
 }
 
 ::ng-deep .nav-tabs.step-anchor .nav-item.active::after,
 ::ng-deep .nav-tabs.step-anchor .nav-item.completed::after,
 ::ng-deep .nav-tabs.step-anchor .nav-item.done::after {
-    background-color: #4a90e2;
+    background-color: #00467f;
 }
 
 .btn-outline-blue {

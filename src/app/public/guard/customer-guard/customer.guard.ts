@@ -15,7 +15,7 @@ export class CustomerGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       const cookieValue = this.cookieService.getCookie(environment.tokenKhachHang);
-      if (cookieValue) {
+      if (cookieValue) { 
         return true;
       } else {
         this.router.navigate(['/public/signin']);

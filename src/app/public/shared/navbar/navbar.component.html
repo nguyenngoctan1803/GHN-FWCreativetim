@@ -13,24 +13,24 @@
         <div class="navbar-collapse" id="navbarToggler">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" rel="tooltip" title="Trang chủ" data-placement="bottom"
+                    <a class="nav-link" [ngClass]="{'active': isActiveMenu('/public/home')}" rel="tooltip" placement="bottom" ngbTooltip="Trang chủ"
                         routerLink="/public/home">
                         Trang chủ
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" rel="tooltip" title="Tạo đơn hàng" data-placement="bottom"
+                    <a class="nav-link" [ngClass]="{'active': isActiveMenu('/public/create-order')}" ngbTooltip="Tạo đơn hàng" placement="bottom"
                         routerLink="/public/create-order">
-                        Giao hàng nhanh
+                        Thao tác đơn hàng
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" rel="tooltip" title="Trang chủ" data-placement="bottom"
-                        routerLink="/public/home">
-                        Giới thiệu
+                    <a class="nav-link" [ngClass]="{'active': isActiveMenu('/public/order')}" ngbTooltip="Tất cả đơn hàng" placement="bottom"
+                        routerLink="/public/order">
+                        Đơn hàng
                     </a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link" rel="tooltip" title="Trang chủ" data-placement="bottom"
                         routerLink="/public/home">
                         Hỗ trợ
@@ -41,14 +41,14 @@
                         routerLink="/public/home">
                         Thông tin
                     </a>
-                </li>
+                </li> -->
                 <ng-container *ngIf="isLoggedIn; else elseTemplate">
                     <div class="user-info">
                         <div class="avatar avatar-logo"><img
                                 src="https://cdn.ghn.vn/online-static/fe-5sao/1.23.0/media/user.c57d53db.svg"
                                 alt="logo"></div>
-                        <div class="name-user"><a href="/account">
-                                <div style="font-weight: 600;">Tân Nguyễn</div>
+                        <div class="name-user"><a routerLink="/public/profile">
+                                <div style="font-weight: 600;">{{userName}}</div>
                             </a><button (click)="onLogout()" class="btn btn-link m-0 p-0">
                                 <div style="font-weight: 600; color: rgb(255, 199, 0);">Đăng xuất<i
                                         class="fas fa-user-tie"></i></div>

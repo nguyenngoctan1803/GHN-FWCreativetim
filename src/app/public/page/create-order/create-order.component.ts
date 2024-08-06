@@ -195,11 +195,11 @@ export class CreateOrderComponent implements OnInit {
   getNextButtonClass() {
     const currentStepIndex = this.config.selected;
     if (currentStepIndex === 0 && this.isValidStep1()) {
-      return 'btn btn-fill btn-submit btn-primary';
+      return 'btn btn-fill btn-submit btn-danger';
     }else if(currentStepIndex === 1 && this.isValidStep2()){
-      return 'btn btn-fill btn-submit btn-primary';
+      return 'btn btn-fill btn-submit btn-danger';
     }else if(currentStepIndex === 2 && this.isValidStep3()){
-      return 'btn btn-fill btn-submit btn-primary';
+      return 'btn btn-fill btn-submit btn-danger';
     }
     return 'btn btn-fill btn-submit btn-secondary';
   }
@@ -257,6 +257,10 @@ export class CreateOrderComponent implements OnInit {
   // submit
   onSubmit() {
     if (this.orderForm.valid) {
+      if(this.summary.distance == 0){
+        this.toastr.error('Thông tin địa chỉ không hợp lệ','Thông báo');
+        return;
+      }
       let formData = this.orderForm.value;
       let payload = {
         diaChiNhanHang: formData.diaChiNhanHang?.display_name,

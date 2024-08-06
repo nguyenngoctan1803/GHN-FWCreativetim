@@ -27,15 +27,15 @@ export class SigninComponent implements OnInit {
     private router:Router, 
     private customerService: CustomerService,
     private toastr: ToastrService,
-    private subjectService: SubjectService
+    private subjectService: SubjectService,
+    private cookieService: StorageService,
   ) { }
 
   ngOnInit() {
-    this.subjectService.isLoggedIn.subscribe(loggedIn => {
-      if(loggedIn){
-        this.router.navigate(['/public/home']);
-      } 
-    });
+    const cookieValue = this.cookieService.getCookie(environment.tokenKhachHang);
+    if (cookieValue) {
+      this.router.navigate(['/']);
+    }
   }
 
   onSubmit() {
