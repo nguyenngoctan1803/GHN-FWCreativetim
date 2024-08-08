@@ -44,9 +44,9 @@ export class CustomerService {
     return this.apiService.post('KhachHang/tao-don-hang', body);
   }
 
-  getListOrder(){
+  getListOrder(search = ''){
     let idKh = this.cookieService.getCookie(environment.idKhachHang);
-    return this.apiService.get(`KhachHang/don-hang/${idKh}`);
+    return this.apiService.get(`KhachHang/don-hang/${idKh}?search=${search}`);
   }
   getOrderById(id){
     return this.apiService.get(`DonHang/${id}`);

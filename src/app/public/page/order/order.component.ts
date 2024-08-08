@@ -1,9 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CustomerService } from 'app/public/service/customer.service';
 import { MapService } from 'app/public/service/map.service';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { ToastrService } from 'ngx-toastr';
+import { debounceTime } from 'rxjs';
 
 @Component({
   selector: 'app-order',
@@ -25,6 +27,7 @@ export class OrderComponent implements OnInit {
     wheelSpeed: 0.2,
     swipeEasing: true
   };
+  searchControl = new FormControl();
   constructor(
     private router: Router,
     private customerService: CustomerService,
@@ -32,11 +35,18 @@ export class OrderComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.searchControl.valueChanges
+    .pipe(
+      debounceTime(2000) // Chờ 300ms sau khi người dùng ngừng nhập
+    )
+    .subscribe(value => {
+      this.loadData(value);
+    });
     this.loadData();
   }
 
-  loadData() {
-    this.customerService.getListOrder().subscribe(
+  loadData(search = '') {
+    this.customerService.getListOrder(search).subscribe(
       response => {
         this.data = response as any[];
         this.dataWaitConfirm = this.data.filter(d => d.trangThaiID == 1);

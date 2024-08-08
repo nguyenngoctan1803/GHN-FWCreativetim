@@ -71,3 +71,37 @@ p {
     background-color: #ff5638;
     color: #fff;
 }
+
+.block-pay {
+    height: 550px
+}
+
+.bl-pay-style {
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .05);
+    border-radius: .125rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background: #fff
+}
+
+.bl-pay-img {
+    background-position: 50%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 100px;
+    height: 100px;
+    background-image: url("/assets/img/order-default.jpg")
+}
+
+.bl-pay-text {
+    margin: 20px 0 0;
+    font-size: 18px;
+    line-height: 1.4;
+    color: rgba(0, 0, 0, .8);
+    font-weight: 500
+}
